@@ -1,27 +1,22 @@
 const inquirer = require("inquirer");
-const choice = require('./lib/chosenResponse.js');
+
+const { mysql, db } = require('./config/connection.js');
+const Queries = require('./lib/queries.js');
+const questions = require("./lib/questions.js");
 
 console.info(`Program Start`);
 
-inquirer
-  .prompt({
-    name: "menu",
-    type: "list",
-    message: "What would you like to do",
-    choices: [
-      "View All Departments",
-      "View All Roles",
-      "View All Employees",
-      "Add Department",
-      "Add Role",
-      "Add Employee",
-      "Update Employee Role",
-      "Exit",
-    ],
-  })
-  .then(
-    (response) =>
-      response.menu.charAt(0).toLowerCase() +
-      response.menu.slice(1).split(" ").join("")
-  )
-  .then((response) => choice(response));
+async function menu() {
+  const start = await inquirer.prompt(questions.menu)
+  const resJoin = await start.menu.split(" ").join("")
+  const prompt = await new Queries[resJoin]() 
+  await prompt.connect()
+  menu()
+
+}
+
+menu()
+
+// .then((response) => response.menu.split(" ").join(""))
+// .then((response) => choice(response))
+// .catch((err) => console.log(err));

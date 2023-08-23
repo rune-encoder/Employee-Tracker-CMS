@@ -11,4 +11,4 @@ const db = mysql.createConnection(
     console.log(`Connected to the Employee CMS Database.`)
 );
 
-module.exports = db;
+module.exports = { mysql, db }
