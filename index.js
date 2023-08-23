@@ -4,7 +4,7 @@ const fs = require("fs");
 require("console.table");
 
 const Queries = require("./lib/queries.js");
-const questions = require("./lib/questions.js");
+const { questions, departmentList, roleList, employeeList } = require("./lib/questions.js");
 
 console.info(`Program Start`);
 
@@ -47,28 +47,42 @@ async function menu() {
     await response.connect();
     console.log(`\nSuccessfully added new employee: ${subPrompt.first} ${subPrompt.last} to the database.\n`);
     init();
+  } else if (funcName === "UpdateEmployeeRole") {
+    let subPrompt = await inquirer.prompt(questions.updateEmployee);
+    let response = await new Queries[funcName](
+      subPrompt.role,
+      subPrompt.name
+    );
+    await response.connect();
+    console.log(`\nSuccessfully update ${employeeList[subPrompt.name - 1].name} role to ${roleList[subPrompt.role - 1].name}. \n`);
+    init();
   } else {
-    console.log("nope");
+    console.log(`\nApplication Closed. \n`);
+    process.exit();
   }
 }
 
 async function init() {
-  // Create .json file that will contain our department list.
-  // This will be used to render the list during inquirer questions.
+  // Retrieves and saves latest updated list of departments stored in database.
+  // Used to render list of answer choices for our questions.
   let addDept = new Queries.AddRole();
   const departmentList = await addDept.departmentList();
   let deptData = JSON.stringify(departmentList);
   fs.writeFileSync("./lib/lists/departmentList.json", deptData);
 
+  // Retrieves and saves latest updated list of roles stored in database.
+  // Used to render list of answer choices for our questions.
   let addRole = new Queries.AddEmployee();
   const roleList = await addRole.roleList();
   let roleData = JSON.stringify(roleList);
   fs.writeFileSync("./lib/lists/roleList.json", roleData);
   
-  const managerList = await addRole.managerList()
-  await managerList.push({"value":null,"name":"None"});
-  let managerData = JSON.stringify(managerList);
-  fs.writeFileSync("./lib/lists/managerList.json", managerData);
+  // Retrieves and saves latest updated list of employees stored in database.
+  // Used to render list of answer choices for our questions.
+  const employeeList = await addRole.employeeList()
+  // await employeeList.push({"value":null,"name":"None"});
+  let employeeData = JSON.stringify(employeeList);
+  fs.writeFileSync("./lib/lists/employeeList.json", employeeData);
 
   menu();
 }

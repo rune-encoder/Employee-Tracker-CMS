@@ -42,4 +42,4 @@ VALUES ("TEST FIRST_N", "TEST LAST_N", 23, 71);
 
 -- Update Employee Role
 UPDATE employee SET role_id = 24 
-WHERE first_name = 'Nova' AND last_name = 'Mueller';
+WHERE first_name = 'TESTFIRST' AND last_name = 'TESTLAST';
