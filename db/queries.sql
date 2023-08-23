@@ -30,15 +30,15 @@ LEFT JOIN employee manager ON manager.id = employee.manager_id;
 
 -- Add Department
 INSERT INTO department(name)
-VALUES ("TEST DEPARTMENT")
+VALUES ("TEST DEPARTMENT");
 
 -- Add Role
 INSERT INTO role(title, salary, department_id)
-VALUES ("TEST ROLE", 99999, 8)
+VALUES ("TEST ROLE", 99999, 8);
 
 -- Add Employee
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
-VALUES ("TEST FIRST_N", "TEST LAST_N", 23, 71)
+VALUES ("TEST FIRST_N", "TEST LAST_N", 23, 71);
 
 -- Update Employee Role
 UPDATE employee SET role_id = 24 
