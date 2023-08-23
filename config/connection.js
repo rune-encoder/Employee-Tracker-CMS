@@ -9,6 +9,6 @@ const db = mysql.createConnection(
         database: process.env.DB_NAME
     },
     console.log(`Connected to the Employee CMS Database.`)
-);
+).promise();
 
-module.exports = { mysql, db }
+module.exports = db 
