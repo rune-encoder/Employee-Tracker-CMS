@@ -46,6 +46,10 @@
  b. You may add new tables and data.  
  c. You may update existing tables and data.  
  d. You may delete existing tables and data. 
+
+Note: Ensure you have a `.env` file in the root directory.  
+The `.env` file must have:  
+```DB_NAME='cms_db' DB_USER='root' DB_PASSWORD='Your_Password_Here```
  
  ## Contributing
  
