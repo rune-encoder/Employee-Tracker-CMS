@@ -12,6 +12,9 @@
   Technologies used:  
   This application uses MySQL: a relational database management system.  
 
+ >**Application Screenshot:**  
+ ![Application Home](./assets/screenshot-main.gif) 
+ 
  ## Table of Contents
  
  - [Installation](#installation)
