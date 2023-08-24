@@ -42,4 +42,24 @@ VALUES ("TEST FIRST_N", "TEST LAST_N", 23, 71);
 
 -- Update Employee Role
 UPDATE employee SET role_id = 24 
-WHERE first_name = 'TESTFIRST' AND last_name = 'TESTLAST';
+WHERE id = '2';
+
+-- Update employee managers.
+
+
+
+-- View employees by manager.
+
+
+
+-- View employees by department.
+
+
+
+-- Delete departments, roles, and employees.
+
+
+
+-- View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
+
+
