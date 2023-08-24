@@ -11,7 +11,22 @@ const { CreateLists, Delete } = require("./lib/queries.js");
 // Bring in our Questions that will be used in Inquirer
 const questions = require("./lib/questions.js");
 
-console.info(`Program Start`);
+// Console color for text
+const color = require('./lib/console-colors.js');
+
+// Console Art Logo
+const figlet = require("figlet");
+
+console.log(color.red(
+  figlet.textSync("Employee CMS Database", {
+    font: "Cybermedium",
+    horizontalLayout: "default",
+    verticalLayout: "default",
+    width: 80,
+    whitespaceBreak: true,
+  })
+));
+console.log(color.red(`===============ᛒy ᚱuᚢe Eᚢcᛟdeᚱ===============`));
 
 // Initialize and run our Main Menu with an Asynchronous Function.
 async function menu() {
@@ -48,7 +63,7 @@ async function menu() {
     // Using our answers a new department is added.
     await response.result();
     console.log(
-      `\nSuccessfully added new department: ${subPrompt.name} to the database.\n`
+      color.green(`\nSuccessfully added new department: ${subPrompt.name} to the database.\n`)
     );
 
     menu();
@@ -72,7 +87,7 @@ async function menu() {
     // Using our answers a new role is added.
     await response.result();
     console.log(
-      `\nSuccessfully added new role: ${subPrompt.title} to the database.\n`
+      color.green(`\nSuccessfully added new role: ${subPrompt.title} to the database.\n`)
     );
 
     menu();
@@ -103,7 +118,7 @@ async function menu() {
     // Using our answers a new employee is added.
     await response.result();
     console.log(
-      `\nSuccessfully added new employee: ${subPrompt.first} ${subPrompt.last} to the database.\n`
+      color.green(`\nSuccessfully added new employee: ${subPrompt.first} ${subPrompt.last} to the database.\n`)
     );
 
     menu();
@@ -129,9 +144,9 @@ async function menu() {
     // Using our answers a employee role is updated.
     await response.result();
     console.log(
-      `\nSuccessfully updated the role of ${
+      color.green(`\nSuccessfully updated the role of ${
         newEmployeeList[subPrompt.name - 1].name
-      } to ${newRoleList[subPrompt.role - 1].name}. \n`
+      } to ${newRoleList[subPrompt.role - 1].name}. \n`)
     );
     menu();
   } else if (funcName === "UpdateEmployeeManager") {
@@ -152,9 +167,9 @@ async function menu() {
     // Using our answers a new employee manager is updated for an employee.
     await response.result();
     console.log(
-      `\nSuccessfully updated the manager of ${
+      color.green(`\nSuccessfully updated the manager of ${
         newEmployeeList[subPrompt.employee - 1].name
-      } to ${newEmployeeList[subPrompt.manager - 1].name}. \n`
+      } to ${newEmployeeList[subPrompt.manager - 1].name}. \n`)
     );
     menu();
   } else if (funcName === "ViewEmployeesbyDepartment") {
@@ -206,13 +221,13 @@ async function menu() {
     // Using our answers either an employee, department, or role was deleted.
     await response.result();
     console.log(
-      `\nSuccessfully deleted ${
+      color.red(`\n Deleted ${
         questions[questionKey][0].choices[subPrompt[group] - 1].name
-      } from the ${group} table.\n`
+      } from the ${group} table.\n`)
     );
     menu();
   } else {
-    console.log(`\nApplication Closed. \n`);
+    console.log(color.red(`\nApplication Closed. \n`));
     process.exit();
   }
 }
