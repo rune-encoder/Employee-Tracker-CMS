@@ -13,7 +13,7 @@
   This application uses MySQL: a relational database management system.  
 
  >**Application Screenshot:**  
- ![Application Home](./assets/screenshot-main.gif) 
+ ![Application Home](./assets/screenshot-main.png) 
  
  ## Table of Contents
  
